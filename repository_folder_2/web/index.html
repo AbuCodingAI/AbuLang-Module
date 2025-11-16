@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="AbuLang Web Playground - Run AbuLang code in your browser">
+    <meta name="keywords" content="AbuLang, programming, web playground, Python, Pyodide">
+    <meta name="author" content="AbuLang">
+    <title>AbuLang Web Playground</title>
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header role="banner">
+            <h1>AbuLang Web Playground</h1>
+            <p class="subtitle">Run AbuLang code directly in your browser</p>
+        </header>
+
+        <main class="playground" role="main">
+            <section class="editor-section" aria-label="Code Editor">
+                <div class="editor-header">
+                    <h2>Code Editor</h2>
+                    <div class="controls">
+                        <select id="examples-dropdown" aria-label="Load example code">
+                            <option value="">Load Example...</option>
+                        </select>
+                        <button id="help-btn" title="Help" aria-label="Help and documentation">?</button>
+                    </div>
+                </div>
+                <div id="code-editor" role="textbox" aria-label="AbuLang code editor" aria-multiline="true"></div>
+            </section>
+
+            <section class="results-section" aria-label="Output Panel">
+                <div class="results-header">
+                    <h2>Output</h2>
+                    <button id="clear-output-btn" aria-label="Clear output panel">Clear Output</button>
+                </div>
+                <div id="results-panel" role="log" aria-live="polite" aria-atomic="false"></div>
+            </section>
+        </main>
+
+        <nav class="action-buttons" role="navigation" aria-label="Code execution controls">
+            <button id="run-btn" class="primary" aria-label="Run the code">Run Code</button>
+            <button id="clear-btn" aria-label="Clear the editor">Clear Editor</button>
+            <button id="download-btn" aria-label="Download code as .abu file">Download</button>
+            <button id="test-input-btn" aria-label="Test input dialog">Test Input Dialog</button>
+        </nav>
+
+        <div id="loading-indicator" class="hidden" role="status" aria-live="polite">
+            <div class="spinner" aria-hidden="true"></div>
+            <p>Loading Python runtime...</p>
+        </div>
+
+        <div id="input-dialog" class="modal hidden" role="dialog" aria-labelledby="input-prompt" aria-modal="true">
+            <div class="modal-content">
+                <h3 id="input-prompt">Enter value:</h3>
+                <input type="text" id="input-field" aria-label="Input value" />
+                <div class="modal-buttons">
+                    <button id="input-submit-btn" class="primary" aria-label="Submit input">Submit</button>
+                    <button id="input-cancel-btn" aria-label="Cancel input">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CodeMirror JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <!-- AbuLang modules -->
+    <script src="lib/error-formatter.js"></script>
+    <script src="lib/runtime-bridge.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
